@@ -21,6 +21,8 @@ const prepareStateFromWord = (given_word) => {
 const WordCard = ({ value }) => {
   const [state, setState] = useState(prepareStateFromWord(value));
   const [isShowReset, setIsShowReset] = useState(false);
+  const [text, setText] = useState("");
+
   const activationHandler = (c) => {
     console.log(`${c} has been activated.`);
 
@@ -29,11 +31,17 @@ const WordCard = ({ value }) => {
     if (guess.length === state.word.length) {
       if (guess === state.word) {
         // console.log("yeah!");
+        setText("Finally!, You won.");
         runFireWorks();
         setState({ ...state, guess: "", completed: true });
       } else {
-        console.log("reset");
-        setState({ ...state, guess: "", attempt: state.attempt + 1 });
+        setText("Oops! Your selection is wrong, Please try again.");
+        setState({
+          ...state,
+          guess: "",
+          attempt: state.attempt + 1,
+          completed: false,
+        });
       }
     }
   };
@@ -52,6 +60,19 @@ const WordCard = ({ value }) => {
   }, [state.completed]);
   return (
     <div>
+      {state.completed ? (
+        <h1
+          style={{ color: "green", textTransform: "uppercase", opacity: "0.8" }}
+        >
+          {text}
+        </h1>
+      ) : (
+        <h1
+          style={{ color: "red", textTransform: "uppercase", opacity: "0.8" }}
+        >
+          {text}
+        </h1>
+      )}
       {state.chars.map((c, i) => (
         <CharacterCard
           value={c}
