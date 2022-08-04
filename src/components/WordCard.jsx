@@ -30,7 +30,6 @@ const WordCard = ({ value }) => {
     setState({ ...state, guess });
     if (guess.length === state.word.length) {
       if (guess === state.word) {
-        // console.log("yeah!");
         setText("Finally!, You won.");
         runFireWorks();
         setState({ ...state, guess: "", completed: true });
