@@ -8,7 +8,9 @@
           attempt={state.attempt}
 
   ในส่วนถัดไปจะสร้างปุ่มเพื่อ reset ค่า โดยจะติดตั้ง react-icon โดยจะใช้คำสั่ง npm install react-icons --save ถ้า state.completed เป็น true จะให้แสดงปุ่ม reset โดยจะให้แสดงหลังจากตอบถูก 5 วินาที โดยจะใช้ setTimeout เป็นตัวจัดการ
+  
   ![image](https://user-images.githubusercontent.com/100436146/182798402-8d4db4fd-be3c-4492-8fab-6ff19c137416.png)
+  
   ในส่วนถัดไปจะสร้างปุ่มเพื่อ reset ค่า โดยจะติดตั้ง react-icon โดยจะใช้คำสั่ง npm install react-icons --save ถ้า state.completed เป็น true จะให้แสดงปุ่ม reset โดยจะให้แสดงหลังจากตอบถูก 5 วินาที โดยจะใช้ setTimeout เป็นตัวจัดการ เมื่อกด จะ reload page ใหม่ และตัวอักษรจะสลับตำแหน่งกัน เป็นเพราะมีการใช้ loadash lib โดยใช้คำสั่ง _.shuffle(Array.from(word)) จะเป็นการ random ตำแหน่งอักษร
 
 ## หน้าจอเริ่มต้น
