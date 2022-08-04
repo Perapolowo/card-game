@@ -2,6 +2,9 @@ import React from "react";
 import CharacterCard from "./CharacterCard";
 import * as _ from "lodash";
 import { useState } from "react";
+import { runFireWorks } from "../lib/utils";
+import { useEffect } from "react";
+import { GrPowerReset } from "react-icons/gr";
 
 const prepareStateFromWord = (given_word) => {
   let word = given_word.toUpperCase();
@@ -17,6 +20,7 @@ const prepareStateFromWord = (given_word) => {
 
 const WordCard = ({ value }) => {
   const [state, setState] = useState(prepareStateFromWord(value));
+  const [isShowReset, setIsShowReset] = useState(false);
   const activationHandler = (c) => {
     console.log(`${c} has been activated.`);
 
@@ -24,7 +28,8 @@ const WordCard = ({ value }) => {
     setState({ ...state, guess });
     if (guess.length === state.word.length) {
       if (guess === state.word) {
-        console.log("yeah!");
+        // console.log("yeah!");
+        runFireWorks();
         setState({ ...state, guess: "", completed: true });
       } else {
         console.log("reset");
@@ -32,6 +37,19 @@ const WordCard = ({ value }) => {
       }
     }
   };
+
+  const handleReset = () => {
+    window.location.reload(false);
+  };
+
+  useEffect(() => {
+    if (state.completed) {
+      const timer = setTimeout(() => {
+        setIsShowReset(true);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [state.completed]);
   return (
     <div>
       {state.chars.map((c, i) => (
@@ -42,6 +60,9 @@ const WordCard = ({ value }) => {
           attempt={state.attempt}
         />
       ))}
+      {isShowReset && (
+        <GrPowerReset onClick={handleReset} style={{ cursor: "pointer" }} />
+      )}
     </div>
   );
 };
