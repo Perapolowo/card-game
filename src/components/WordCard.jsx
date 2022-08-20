@@ -2,7 +2,6 @@ import React from "react";
 import CharacterCard from "./CharacterCard";
 import * as _ from "lodash";
 import { useState } from "react";
-import { runFireWorks } from "../lib/utils";
 import { useEffect } from "react";
 import { GrPowerReset } from "react-icons/gr";
 
@@ -32,7 +31,6 @@ const WordCard = ({ value }) => {
       if (guess === state.word) {
         setText("Finally!, You won.");
         runFireWorks();
-        setState({ ...state, guess: "", completed: true });
       } else {
         setText("Oops! Your selection is wrong, Please try again.");
         setState({
